@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTAKUKON 2026 — Zimbabwe's Premier Anime Convention</title>
+<meta name="description" content="Zimbabwe's first anime convention by Otaku Konnect. OTAKUKON 2026 — August 23, Moto Republik, Harare.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:          #C8B4F0;
+  --bg-dark:     #0D0D0D;
+  --cream:       #FFF5E4;
+  --white:       #FFFFFF;
+  --purple:      #5B21B6;
+  --yellow:      #F5C842;
+  --teal:        #7EECD8;
+  --pink:        #FFB3C6;
+  --red:         #E84040;
+  --ink:         #0D0D0D;
+  --shadow:      4px 4px 0 #0D0D0D;
+  --shadow-lg:   6px 6px 0 #0D0D0D;
+  --pill:        999px;
+  --card:        18px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); font-family: 'Inter', sans-serif; color: var(--ink); overflow-x: hidden; }
+
+/* ─── ANIMATIONS ─── */
+.reveal { opacity:0; transform:translateY(28px); transition: opacity .65s cubic-bezier(.22,1,.36,1), transform .65s cubic-bezier(.22,1,.36,1); }
+.reveal.in { opacity:1; transform:none; }
+.stagger > * { opacity:0; transform:translateY(20px); transition: opacity .5s cubic-bezier(.22,1,.36,1), transform .5s cubic-bezier(.22,1,.36,1); }
+.stagger.in > *:nth-child(1){ opacity:1;transform:none;transition-delay:.05s }
+.stagger.in > *:nth-child(2){ opacity:1;transform:none;transition-delay:.15s }
+.stagger.in > *:nth-child(3){ opacity:1;transform:none;transition-delay:.25s }
+.stagger.in > *:nth-child(4){ opacity:1;transform:none;transition-delay:.35s }
+.stagger.in > *:nth-child(5){ opacity:1;transform:none;transition-delay:.45s }
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+.hero-eyebrow { animation: fadeUp .7s .1s both }
+.hero-title   { animation: fadeUp .7s .25s both }
+.hero-sub     { animation: fadeUp .7s .4s both }
+.hero-actions { animation: fadeUp .7s .55s both }
+.stat-notes   { animation: fadeUp .7s .7s both }
+@keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ─── NAV ─── */
+nav { position:sticky; top:1.2rem; z-index:100; display:flex; justify-content:center; padding:0 1.5rem; pointer-events:none; }
+.nav-inner {
+  background:var(--white); border:3px solid var(--ink); box-shadow:var(--shadow);
+  border-radius:var(--pill); display:flex; align-items:center; justify-content:space-between;
+  padding:.55rem .55rem .55rem 1.6rem; width:100%; max-width:920px; pointer-events:all;
+  transition:box-shadow .2s;
+}
+.nav-inner:hover { box-shadow:var(--shadow-lg); }
+.nav-logo { font-family:'Bebas Neue',cursive; font-size:1.4rem; letter-spacing:3px; color:var(--ink); text-decoration:none; }
+.nav-logo span { color:var(--purple); }
+.nav-links { display:flex; gap:1.6rem; list-style:none; align-items:center; }
+.nav-links a { font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink); text-decoration:none; position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:2px; background:var(--purple); transform:scaleX(0); transform-origin:left; transition:transform .2s; }
+.nav-links a:hover { color:var(--purple); }
+.nav-links a:hover::after { transform:scaleX(1); }
+.nav-btn { background:var(--red); color:var(--white)!important; padding:.5rem 1.3rem; border-radius:var(--pill); border:3px solid var(--ink); box-shadow:var(--shadow); font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:background .15s, transform .1s, box-shadow .1s; }
+.nav-btn:hover { background:var(--purple); transform:translate(-1px,-1px); box-shadow:5px 5px 0 var(--ink); }
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+.hamburger span { display:block; width:22px; height:2.5px; background:var(--ink); border-radius:2px; }
+
+/* ─── MOBILE DRAWER ─── */
+.drawer { display:none; position:fixed; inset:0; background:var(--white); z-index:200; flex-direction:column; padding:2.5rem 2rem; gap:1.8rem; overflow-y:auto; }
+.drawer.open { display:flex; }
+.drawer-close { font-family:'Bebas Neue',cursive; font-size:1.1rem; letter-spacing:2px; cursor:pointer; align-self:flex-end; background:none; border:none; color:var(--ink); }
+.drawer a { font-family:'Bebas Neue',cursive; font-size:2.8rem; letter-spacing:3px; color:var(--ink); text-decoration:none; border-bottom:2px solid rgba(0,0,0,.08); padding-bottom:.5rem; transition:color .15s, padding-left .15s; }
+.drawer a:hover { color:var(--purple); padding-left:.5rem; }
+.drawer-socials { display:flex; gap:.6rem; flex-wrap:wrap; margin-top:auto; padding-top:1rem; border-top:2px solid rgba(0,0,0,.08); }
+.drawer-socials a { font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); border:2px solid var(--ink); border-radius:var(--pill); padding:.3rem .85rem; text-decoration:none; font-family:'Inter',sans-serif; }
+.drawer-socials a:hover { background:var(--purple); color:var(--white); border-color:var(--purple); }
+
+/* ─── HERO ─── */
+.hero { min-height:90vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:2rem 2rem 5rem; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(0,0,0,.12) 1.5px,transparent 1.5px); background-size:18px 18px; pointer-events:none; }
+
+/* hero bg image overlay */
+.hero-bg { position:absolute; inset:0; z-index:0; }
+.hero-bg img { width:100%; height:100%; object-fit:cover; opacity:.18; }
+.hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom, var(--bg) 0%, transparent 40%, var(--bg) 100%); }
+
+.hero-eyebrow { display:inline-flex; align-items:center; gap:.5rem; border:2.5px solid var(--ink); border-radius:var(--pill); padding:.3rem 1rem; background:var(--white); box-shadow:var(--shadow); margin-bottom:2rem; position:relative; z-index:1; }
+.eyebrow-badge { background:var(--red); color:var(--white); border-radius:var(--pill); padding:.15rem .65rem; font-size:.68rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.eyebrow-text { font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+
+.hero-title { position:relative; z-index:1; margin-bottom:1.2rem; font-family:'Bebas Neue',cursive; line-height:.92; }
+.hero-title .xl { font-size:clamp(4rem,13vw,9.5rem); letter-spacing:2px; }
+.hero-title .fill { color:var(--ink); }
+.hero-title .ghost { -webkit-text-stroke:3px var(--ink); color:transparent; }
+.hero-title .row2 { display:flex; justify-content:center; align-items:baseline; gap:.5rem; }
+
+.hero-sub { position:relative; z-index:1; max-width:540px; margin:0 auto 2.5rem; font-size:1.05rem; line-height:1.6; color:#222; }
+.hero-actions { position:relative; z-index:1; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:4rem; }
+
+.stat-notes { position:relative; z-index:1; display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap; }
+.stat-note { border:3px solid var(--ink); box-shadow:var(--shadow-lg); border-radius:var(--card); width:175px; padding:1.2rem 1rem 1rem; text-align:left; position:relative; transition:transform .2s, box-shadow .2s; }
+.stat-note:hover { transform:translate(-2px,-2px); box-shadow:8px 8px 0 var(--ink); }
+.stat-note::before { content:''; position:absolute; top:-10px; left:50%; transform:translateX(-50%); width:34px; height:12px; background:rgba(255,255,255,.75); border:2px solid rgba(0,0,0,.15); border-radius:3px; }
+.stat-note:nth-child(1){ background:var(--yellow); }
+.stat-note:nth-child(2){ background:var(--teal); }
+.stat-note:nth-child(3){ background:var(--pink); }
+.stat-big { font-family:'Bebas Neue',cursive; font-size:2.6rem; letter-spacing:1px; line-height:1; }
+.stat-label { font-size:.73rem; font-weight:600; color:#333; margin-top:.3rem; line-height:1.35; }
+
+/* ─── BUTTONS ─── */
+.btn { font-family:'Bebas Neue',cursive; font-size:1.1rem; letter-spacing:2px; padding:.75rem 2rem; border-radius:var(--pill); border:3px solid var(--ink); box-shadow:var(--shadow); cursor:pointer; text-decoration:none; display:inline-block; transition:box-shadow .15s, transform .15s, background .15s; }
+.btn:hover { transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink); }
+.btn:active { transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+.btn-red    { background:var(--red);    color:var(--white); }
+.btn-red:hover { background:#c93232; }
+.btn-white  { background:var(--white);  color:var(--ink); }
+.btn-purple { background:var(--purple); color:var(--white); }
+.btn-purple:hover { background:#4a1a9a; }
+.btn-yellow { background:var(--yellow); color:var(--ink); }
+.btn-full   { display:block; width:100%; text-align:center; }
+
+/* ─── TICKER ─── */
+.ticker-wrap { background:var(--ink); border-top:3px solid var(--purple); overflow:hidden; padding:.9rem 0; }
+.ticker-track { display:flex; width:max-content; animation:ticker 28s linear infinite; }
+.ticker-track:hover { animation-play-state:paused; }
+.ticker-item { font-family:'Bebas Neue',cursive; font-size:1rem; letter-spacing:3px; color:var(--yellow); padding:0 2rem; white-space:nowrap; display:flex; align-items:center; gap:2rem; }
+.ticker-item::after { content:'★'; color:rgba(91,33,182,.8); font-size:.65rem; }
+
+/* ─── SECTION UTILS ─── */
+.wrap { max-width:920px; margin:0 auto; padding:5rem 2rem; }
+.section-label { font-size:.72rem; font-weight:800; letter-spacing:.2em; text-transform:uppercase; color:var(--purple); margin-bottom:.8rem; }
+.section-title { font-family:'Bebas Neue',cursive; font-size:clamp(2.4rem,6vw,4rem); letter-spacing:2px; color:var(--ink); line-height:1; margin-bottom:2.5rem; }
+.on-dark .section-label { color:rgba(255,255,255,.45); }
+.on-dark .section-title { color:var(--white); }
+.on-purple .section-label { color:rgba(255,255,255,.5); }
+.on-purple .section-title { color:var(--white); }
+
+/* ─── ABOUT ─── */
+.about-bg { background:var(--cream); border-top:4px solid var(--ink); }
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+.about-img { border:4px solid var(--ink); box-shadow:var(--shadow-lg); border-radius:var(--card); overflow:hidden; aspect-ratio:4/3; }
+.about-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s; }
+.about-img:hover img { transform:scale(1.04); }
+.about-copy p { font-size:.95rem; line-height:1.7; color:#333; margin-bottom:1rem; }
+.about-copy p:last-child { margin-bottom:0; }
+.about-stat-row { display:flex; gap:1rem; margin-top:1.5rem; flex-wrap:wrap; }
+.about-stat { background:var(--white); border:3px solid var(--ink); box-shadow:var(--shadow); border-radius:var(--card); padding:.9rem 1.2rem; }
+.about-stat .num { font-family:'Bebas Neue',cursive; font-size:2.2rem; color:var(--purple); line-height:1; }
+.about-stat .lbl { font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#666; margin-top:.1rem; }
+
+/* ─── EVENTS GRID ─── */
+.events-bg { background:var(--bg); }
+.events-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+.ecard { background:var(--white); border:3px solid var(--ink); box-shadow:var(--shadow-lg); border-radius:var(--card); padding:1.6rem 1.5rem; position:relative; overflow:hidden; transition:transform .2s, box-shadow .2s; }
+.ecard:hover { transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--ink); }
+.ecard.wide { grid-column:span 2; }
+.ecard.c-yellow  { background:var(--yellow); }
+.ecard.c-teal    { background:var(--teal); }
+.ecard.c-pink    { background:var(--pink); }
+.ecard.c-purple  { background:var(--purple); }
+.ecard.c-cream   { background:var(--cream); }
+.ecard.dots::after { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(0,0,0,.1) 1.5px,transparent 1.5px); background-size:10px 10px; pointer-events:none; }
+.etag { display:inline-block; border:2px solid currentColor; border-radius:var(--pill); padding:.12rem .7rem; font-size:.63rem; font-weight:800; letter-spacing:.15em; text-transform:uppercase; margin-bottom:.8rem; opacity:.7; }
+.ecard.c-purple .etag { color:var(--white); }
+.etitle { font-family:'Bebas Neue',cursive; font-size:1.85rem; letter-spacing:1px; line-height:1.05; margin-bottom:.5rem; color:var(--ink); }
+.ecard.c-purple .etitle { color:var(--white); }
+.ebody { font-size:.86rem; line-height:1.55; color:#2a2a2a; }
+.ecard.c-purple .ebody { color:rgba(255,255,255,.85); }
+
+/* ─── HIGHLIGHTS GALLERY ─── */
+.gallery-bg { background:var(--bg-dark); border-top:4px solid var(--purple); border-bottom:4px solid var(--purple); }
+.gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+.gslot { border-radius:var(--card); overflow:hidden; border:3px solid rgba(255,255,255,.1); position:relative; cursor:pointer; }
+.gslot.feature { grid-column:span 2; grid-row:span 2; }
+.gslot img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s cubic-bezier(.22,1,.36,1); aspect-ratio:4/3; }
+.gslot.feature img { aspect-ratio:unset; height:100%; min-height:300px; }
+.gslot:hover img { transform:scale(1.05); }
+.gslot-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(91,33,182,.85) 0%, transparent 60%); opacity:0; transition:opacity .3s; display:flex; align-items:flex-end; padding:1.2rem; }
+.gslot:hover .gslot-overlay { opacity:1; }
+.gslot-label { font-family:'Bebas Neue',cursive; font-size:1.1rem; letter-spacing:2px; color:var(--yellow); }
+
+/* placeholder if no image */
+.gph { width:100%; aspect-ratio:4/3; background:linear-gradient(135deg,#1e0a4a,var(--purple)); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.5rem; text-align:center; }
+.gslot.feature .gph { min-height:300px; aspect-ratio:unset; }
+.gph-cross { width:40px; height:40px; border:3px dashed rgba(255,255,255,.35); border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:.8rem; font-size:1.4rem; color:rgba(255,255,255,.35); }
+.gph p { font-family:'Bebas Neue',cursive; font-size:.95rem; letter-spacing:2px; color:rgba(255,255,255,.4); }
+.gph small { font-size:.65rem; color:rgba(255,255,255,.25); margin-top:.3rem; display:block; }
+
+.gallery-note { margin-top:1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+.gallery-note p { font-size:.82rem; color:rgba(255,255,255,.4); line-height:1.5; }
+
+/* ─── REGISTER CARDS ─── */
+.reg-bg { background:var(--bg); }
+.reg-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+.reg-card { border:3px solid var(--ink); box-shadow:var(--shadow-lg); border-radius:var(--card); overflow:hidden; transition:transform .2s, box-shadow .2s; }
+.reg-card:hover { transform:translate(-3px,-3px); box-shadow:9px 9px 0 var(--ink); }
+.reg-card img { width:100%; aspect-ratio:1; object-fit:cover; display:block; transition:transform .4s; }
+.reg-card:hover img { transform:scale(1.04); }
+.reg-card-body { background:var(--white); padding:1.2rem 1.3rem 1.4rem; }
+.reg-card-title { font-family:'Bebas Neue',cursive; font-size:1.4rem; letter-spacing:1px; margin-bottom:.3rem; }
+.reg-card-desc { font-size:.8rem; color:#555; line-height:1.5; margin-bottom:1rem; }
+
+/* ─── TICKETS ─── */
+.tickets-bg { background:var(--bg-dark); padding:5rem 2rem; }
+.tickets-inner { max-width:920px; margin:0 auto; }
+.ticket-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.5rem; }
+.tcard { background:var(--cream); border:3px solid rgba(255,255,255,.12); box-shadow:6px 6px 0 rgba(255,255,255,.07); border-radius:var(--card); overflow:hidden; transition:transform .2s, box-shadow .2s; }
+.tcard:hover { transform:translate(-2px,-2px); box-shadow:8px 8px 0 rgba(255,255,255,.12); }
+.tcard.featured { border-color:var(--yellow); box-shadow:6px 6px 0 var(--yellow); }
+.tcard.featured:hover { box-shadow:9px 9px 0 var(--yellow); }
+.thead { background:var(--ink); border-bottom:3px solid rgba(255,255,255,.15); padding:1rem 1.4rem; display:flex; justify-content:space-between; align-items:center; }
+.tcard.featured .thead { background:var(--purple); border-color:var(--yellow); }
+.ttype { font-family:'Bebas Neue',cursive; font-size:1.2rem; letter-spacing:2px; color:var(--white); }
+.tbadge { background:var(--red); color:var(--white); border-radius:var(--pill); padding:.15rem .6rem; font-size:.6rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+.tprice-block { padding:1.4rem 1.4rem .5rem; }
+.tprice { font-family:'Bebas Neue',cursive; font-size:5rem; line-height:1; color:var(--purple); }
+.tprice sup { font-size:2rem; vertical-align:top; margin-top:.5rem; display:inline-block; }
+.tdesc { font-size:.78rem; color:#666; font-style:italic; }
+.tdivider { border:none; border-top:2px dashed rgba(0,0,0,.15); margin:1rem 0; }
+.tfeatures { padding:0 1.4rem; list-style:none; margin-bottom:1.2rem; }
+.tfeatures li { font-size:.83rem; padding:.32rem 0; border-bottom:1px solid rgba(0,0,0,.07); color:#333; }
+.tfeatures li:last-child { border:none; }
+.tfeatures li::before { content:'→ '; color:var(--purple); font-weight:700; }
+.taction { padding:0 1.4rem 1.4rem; }
+.phase-bar { background:var(--yellow); border-radius:var(--card); padding:1.2rem 1.5rem; margin-top:2rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+.phase-bar p { font-size:.9rem; font-weight:700; }
+.phase-bar span { font-size:.78rem; font-weight:400; opacity:.7; display:block; }
+
+/* ─── HOW TO BUY ─── */
+.buy-bg { background:var(--bg); border-top:4px solid var(--ink); border-bottom:4px solid var(--ink); }
+.buy-pill { background:var(--white); border:3px solid var(--ink); box-shadow:var(--shadow-lg); border-radius:var(--pill); display:flex; align-items:center; overflow:hidden; max-width:580px; margin:0 auto 2.5rem; transition:box-shadow .2s; }
+.buy-pill:focus-within { box-shadow:7px 7px 0 var(--ink); }
+.buy-pill input { flex:1; border:none; outline:none; font-family:'Inter',sans-serif; font-size:.9rem; padding:1rem 1.5rem; background:transparent; color:var(--ink); }
+.buy-pill input::placeholder { color:#aaa; }
+.buy-pill button { background:var(--red); color:var(--white); border:none; border-left:3px solid var(--ink); padding:1rem 1.5rem; font-family:'Bebas Neue',cursive; font-size:1rem; letter-spacing:2px; cursor:pointer; border-radius:0 var(--pill) var(--pill) 0; transition:background .15s; }
+.buy-pill button:hover { background:var(--purple); }
+.buy-methods { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:1rem; }
+.bmethod { background:var(--white); border:3px solid var(--ink); box-shadow:var(--shadow); border-radius:var(--card); padding:1.2rem 1.3rem; transition:transform .2s, box-shadow .2s; }
+.bmethod:hover { transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink); }
+.blabel { font-family:'Bebas Neue',cursive; font-size:1.1rem; letter-spacing:2px; color:var(--purple); margin-bottom:.3rem; }
+.bval { font-size:.9rem; font-weight:700; }
+.bhint { font-size:.74rem; color:#888; margin-top:.2rem; }
+
+/* ─── FAQ ─── */
+.faq-bg { background:var(--cream); border-top:4px solid var(--ink); }
+.faq-list { display:grid; gap:.9rem; margin-top:2.5rem; }
+.faq-item { background:var(--white); border:3px solid var(--ink); box-shadow:var(--shadow); border-radius:var(--card); overflow:hidden; transition:box-shadow .2s; }
+.faq-item:hover { box-shadow:6px 6px 0 var(--ink); }
+.faq-q { padding:1.1rem 1.4rem; font-size:.93rem; font-weight:700; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:1rem; user-select:none; transition:background .15s; }
+.faq-q:hover { background:var(--bg); }
+.faq-tog { width:26px; height:26px; background:var(--purple); color:var(--white); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; transition:transform .3s, background .15s; line-height:1; }
+.faq-item.open .faq-tog { transform:rotate(45deg); background:var(--red); }
+.faq-a { max-height:0; overflow:hidden; transition:max-height .4s cubic-bezier(.22,1,.36,1), padding .3s; padding:0 1.4rem; font-size:.86rem; line-height:1.6; color:#444; }
+.faq-item.open .faq-a { max-height:250px; padding:.8rem 1.4rem 1.2rem; border-top:2px dashed rgba(0,0,0,.1); }
+
+/* ─── SOCIAL BANNER ─── */
+.social-bg { background:var(--purple); border-top:4px solid var(--ink); }
+.social-inner { max-width:920px; margin:0 auto; padding:4rem 2rem; display:flex; align-items:center; justify-content:space-between; gap:2.5rem; flex-wrap:wrap; }
+.social-copy h2 { font-family:'Bebas Neue',cursive; font-size:clamp(2rem,5vw,3.2rem); letter-spacing:2px; color:var(--white); line-height:1; }
+.social-copy h2 span { color:var(--yellow); }
+.social-copy p { font-size:.88rem; color:rgba(255,255,255,.65); margin-top:.4rem; }
+.social-links { display:flex; gap:.8rem; flex-wrap:wrap; }
+.slink { display:inline-flex; align-items:center; gap:.5rem; background:var(--white); color:var(--ink); border:3px solid var(--ink); box-shadow:var(--shadow); border-radius:var(--pill); padding:.55rem 1.2rem; font-size:.78rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; text-decoration:none; transition:transform .15s, box-shadow .15s, background .15s, color .15s; }
+.slink:hover { transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink); }
+.slink.tw:hover { background:#000; color:var(--white); }
+.slink.fb:hover { background:#1877F2; color:var(--white); }
+.slink.ig:hover { background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color:var(--white); border-color:transparent; }
+.slink.yt:hover { background:#FF0000; color:var(--white); }
+.slink.wa:hover { background:#25D366; color:var(--white); }
+.slink svg { width:15px; height:15px; flex-shrink:0; }
+
+/* ─── FOOTER ─── */
+footer { background:var(--bg-dark); color:var(--white); padding:4rem 2rem 2.5rem; }
+.footer-grid { max-width:920px; margin:0 auto; display:grid; grid-template-columns:1.2fr 1fr; gap:3rem; padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:2rem; }
+.flogo { font-family:'Bebas Neue',cursive; font-size:2.4rem; letter-spacing:4px; color:var(--yellow); margin-bottom:.3rem; }
+.ftagline { font-size:.76rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--teal); opacity:.75; margin-bottom:1rem; }
+.fabout { font-size:.82rem; line-height:1.65; color:rgba(255,255,255,.5); margin-bottom:1.2rem; }
+.fsocials { display:flex; gap:.5rem; flex-wrap:wrap; }
+.fsocials a { color:rgba(255,255,255,.55); border:2px solid rgba(255,255,255,.15); border-radius:var(--pill); padding:.28rem .8rem; font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; transition:border-color .15s, color .15s; }
+.fsocials a:hover { border-color:var(--yellow); color:var(--yellow); }
+.finfo h4 { font-family:'Bebas Neue',cursive; font-size:1rem; letter-spacing:2px; color:var(--yellow); margin-bottom:.8rem; }
+.finfo p { font-size:.83rem; line-height:2.1; color:rgba(255,255,255,.55); }
+.finfo strong { color:rgba(255,255,255,.8); margin-right:.4rem; }
+.finfo a { color:rgba(255,255,255,.55); text-decoration:none; }
+.finfo a:hover { color:var(--yellow); }
+.fbot { max-width:920px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+.fbot p { font-size:.73rem; color:rgba(255,255,255,.22); }
+.fbot-links { display:flex; gap:1.5rem; }
+.fbot-links a { font-size:.73rem; color:rgba(255,255,255,.35); text-decoration:none; }
+.fbot-links a:hover { color:var(--yellow); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:740px){
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+  .about-grid { grid-template-columns:1fr; }
+  .events-grid { grid-template-columns:1fr; }
+  .ecard.wide { grid-column:span 1; }
+  .reg-grid { grid-template-columns:1fr 1fr; }
+  .gallery-grid { grid-template-columns:1fr 1fr; }
+  .gslot.feature { grid-column:span 2; grid-row:span 1; }
+  .gslot.feature .gph { min-height:220px; }
+  .social-inner { flex-direction:column; }
+  .footer-grid { grid-template-columns:1fr; gap:2rem; }
+  .fbot { flex-direction:column; align-items:flex-start; }
+}
+@media(max-width:480px){
+  .reg-grid { grid-template-columns:1fr; }
+  .gallery-grid { grid-template-columns:1fr; }
+  .gslot.feature { grid-column:span 1; }
+  .stat-note { width:148px; }
+  .hero-title .xl { font-size:clamp(3.5rem,18vw,5rem); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">OTAKU<span>KON</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#events">Programme</a></li>
+      <li><a href="#register">Register</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#tickets">Tickets</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-btn" href="#tickets">Get Tickets</a>
+    <div class="hamburger" onclick="openDrawer()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="drawer" id="drawer">
+  <button class="drawer-close" onclick="closeDrawer()">CLOSE ×</button>
+  <a href="#about"    onclick="closeDrawer()">About</a>
+  <a href="#events"   onclick="closeDrawer()">Programme</a>
+  <a href="#register" onclick="closeDrawer()">Register</a>
+  <a href="#gallery"  onclick="closeDrawer()">Gallery</a>
+  <a href="#tickets"  onclick="closeDrawer()">Tickets</a>
+  <a href="#faq"      onclick="closeDrawer()">FAQ</a>
+  <a href="#tickets"  onclick="closeDrawer()" style="color:var(--purple)">Get Tickets →</a>
+  <div class="drawer-socials">
+    <a href="http://twitter.com/otakukonnect"   target="_blank" rel="noopener">X / Twitter</a>
+    <a href="http://facebook.com/otakukonnect"  target="_blank" rel="noopener">Facebook</a>
+    <a href="http://instagram.com/otakukonnect" target="_blank" rel="noopener">Instagram</a>
+    <a href="http://youtube.com/@otakukonnect"  target="_blank" rel="noopener">YouTube</a>
+    <a href="https://wa.me/263785552326"        target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://i0.wp.com/otakukon.com/wp-content/uploads/2024/01/DSC_0394-min-scaled.jpg?resize=1024%2C683&ssl=1" alt="Otakukon crowd" loading="eager">
+  </div>
+
+  <div class="hero-eyebrow">
+    <span class="eyebrow-badge">4th Annual</span>
+    <span class="eyebrow-text">Zimbabwe's First Anime Convention</span>
+  </div>
+
+  <div class="hero-title">
+    <div class="xl"><span class="fill">OTAKU</span><span class="ghost">KON</span></div>
+    <div class="xl row2"><span class="fill">20</span><span class="ghost">26</span></div>
+  </div>
+
+  <p class="hero-sub">The annual gathering of Zimbabwe's anime, manga, gaming, and Japanese pop culture community — by Otaku Konnect.</p>
+
+  <div class="hero-actions">
+    <a class="btn btn-red"   href="#tickets">Get Your Ticket</a>
+    <a class="btn btn-white" href="#events">See the Programme →</a>
+  </div>
+
+  <div class="stat-notes">
+    <div class="stat-note">
+      <div class="stat-big">AUG 23</div>
+      <div class="stat-label">Sunday · 10 AM – 9 PM</div>
+    </div>
+    <div class="stat-note">
+      <div class="stat-big">$5–$8</div>
+      <div class="stat-label">Phase 2 until Aug 5</div>
+    </div>
+    <div class="stat-note">
+      <div class="stat-big">HRE</div>
+      <div class="stat-label">Moto Republik, Harare CBD</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="ticker-item">SUNDAY, AUGUST 23, 2026</div>
+    <div class="ticker-item">10:00 AM – 9:00 PM</div>
+    <div class="ticker-item">MOTO REPUBLIK · HARARE</div>
+    <div class="ticker-item">COSPLAY CHAMPIONSHIP</div>
+    <div class="ticker-item">ARTIST ALLEY</div>
+    <div class="ticker-item">GAMING TOURNAMENTS</div>
+    <div class="ticker-item">JAPAN CULTURE CORNER</div>
+    <div class="ticker-item">BY OTAKU KONNECT</div>
+    <div class="ticker-item">SUNDAY, AUGUST 23, 2026</div>
+    <div class="ticker-item">10:00 AM – 9:00 PM</div>
+    <div class="ticker-item">MOTO REPUBLIK · HARARE</div>
+    <div class="ticker-item">COSPLAY CHAMPIONSHIP</div>
+    <div class="ticker-item">ARTIST ALLEY</div>
+    <div class="ticker-item">GAMING TOURNAMENTS</div>
+    <div class="ticker-item">JAPAN CULTURE CORNER</div>
+    <div class="ticker-item">BY OTAKU KONNECT</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-bg" id="about">
+  <div class="wrap">
+    <div class="section-label reveal">Our Story</div>
+    <div class="about-grid">
+      <div class="about-img reveal">
+        <img src="https://i0.wp.com/otakukon.com/wp-content/uploads/2024/01/DSC_0394-min-scaled.jpg?resize=1024%2C683&ssl=1" alt="Otakukon 2023 — first convention" loading="lazy">
+      </div>
+      <div class="about-copy reveal">
+        <div class="section-title" style="margin-bottom:1.2rem;">ZIMBABWE'S FIRST ANIME CONVENTION</div>
+        <p>OTAKUKON is Zimbabwe's first ever anime convention, created by <strong>Otaku Konnect</strong> — a Zimbabwean organisation dedicated to building an environment where fans of Japanese animation, manga, gaming, and pop culture can share and learn from one another.</p>
+        <p>We held our first full-day convention in December 2023, following a community watch-day and merch fair earlier that year. Since then, OTAKUKON has grown into the country's premier annual gathering for the anime community.</p>
+        <p>Our goal is simple: grow the community that appreciates Japanese pop culture within Zimbabwe, and give fans a safe and enjoyable space to belong to.</p>
+        <div class="about-stat-row stagger">
+          <div class="about-stat"><div class="num">2023</div><div class="lbl">Founded</div></div>
+          <div class="about-stat"><div class="num">85+</div><div class="lbl">First Event Attendees</div></div>
+          <div class="about-stat"><div class="num">4th</div><div class="lbl">Annual Edition</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMME -->
+<section class="events-bg" id="events">
+  <div class="wrap">
+    <div class="section-label reveal">Sunday, August 23</div>
+    <div class="section-title reveal">WHAT'S ON</div>
+    <div class="events-grid stagger">
+      <div class="ecard c-yellow">
+        <div class="etag">Cosplay</div>
+        <div class="etitle">Cosplay Championship</div>
+        <p class="ebody">Don your best costume and compete for Zimbabwe's top cosplayer title. Categories from beginner to master — judged by the community. Registration required.</p>
+      </div>
+      <div class="ecard c-teal dots">
+        <div class="etag">Culture</div>
+        <div class="etitle">Japan Culture Corner</div>
+        <p class="ebody">Authentic cultural displays, calligraphy, origami, and traditional games — hosted in partnership with the Embassy of Japan in Zimbabwe.</p>
+      </div>
+      <div class="ecard c-purple wide">
+        <div class="etag">Marketplace</div>
+        <div class="etitle">Artist Alley &amp; Vendor Market</div>
+        <p class="ebody">Discover unique local fan art, handmade merchandise, limited collectibles, and rare imports from Zimbabwe's best anime creators. Support local — take home something truly special.</p>
+      </div>
+      <div class="ecard c-cream">
+        <div class="etag">Gaming</div>
+        <div class="etitle">Tournament Gaming</div>
+        <p class="ebody">Mortal Kombat 1 and EAFC 26 competitions. Sign-ups available at the door. Cash prizes for top-ranked players.</p>
+      </div>
+      <div class="ecard c-pink dots">
+        <div class="etag">Screenings</div>
+        <div class="etitle">Anime Screening Room</div>
+        <p class="ebody">Back-to-back screenings of classic and current anime, curated by the community. Vote for your favourites on the day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER CARDS -->
+<section class="reg-bg" id="register" style="background:var(--cream);border-top:4px solid var(--ink);">
+  <div class="wrap">
+    <div class="section-label reveal">Limited Spots</div>
+    <div class="section-title reveal">REGISTER NOW</div>
+    <div class="reg-grid stagger">
+      <div class="reg-card">
+        <img src="https://i0.wp.com/otakukon.com/wp-content/uploads/2026/06/cosplay-reg-1080.png" alt="Cosplay Registration" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#5B21B6,#C8B4F0)';this.style.minHeight='200px';">
+        <div class="reg-card-body">
+          <div class="reg-card-title">Cosplay Registration</div>
+          <p class="reg-card-desc">Secure your spot in the cosplay championship. Pre-registration is mandatory — walk-in entries may not be accepted.</p>
+          <a class="btn btn-purple btn-full" href="https://wa.me/263785552326?text=Cosplay%20Registration%20-%20OTAKUKON%202026" target="_blank" rel="noopener" style="font-size:.95rem;">Register →</a>
+        </div>
+      </div>
+      <div class="reg-card">
+        <img src="https://i0.wp.com/otakukon.com/wp-content/uploads/2026/06/volunter-reg-1080.png" alt="Volunteer Registration" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#7EECD8,#1a6b5a)';this.style.minHeight='200px';">
+        <div class="reg-card-body">
+          <div class="reg-card-title">Volunteer Registration</div>
+          <p class="reg-card-desc">Want to help make OTAKUKON 2026 happen? Join our volunteer team and be part of the crew behind the con.</p>
+          <a class="btn btn-yellow btn-full" href="https://wa.me/263785552326?text=Volunteer%20Registration%20-%20OTAKUKON%202026" target="_blank" rel="noopener" style="font-size:.95rem;">Apply →</a>
+        </div>
+      </div>
+      <div class="reg-card">
+        <img src="https://i0.wp.com/otakukon.com/wp-content/uploads/2026/06/vendor-reg-1080.png" alt="Vendor Registration" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#FF6B1A,#FFB3C6)';this.style.minHeight='200px';">
+        <div class="reg-card-body">
+          <div class="reg-card-title">Vendor / Artist Registration</div>
+          <p class="reg-card-desc">Apply for a stall at the Artist Alley or Vendor Market. Space is limited — artists, sellers, and creatives welcome.</p>
+          <a class="btn btn-red btn-full" href="https://wa.me/263785552326?text=Vendor%20Registration%20-%20OTAKUKON%202026" target="_blank" rel="noopener" style="font-size:.95rem;">Apply →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-bg" id="gallery">
+  <div class="wrap on-dark">
+    <div class="section-label reveal">Otakukon Through the Years</div>
+    <div class="section-title reveal">HIGHLIGHTS</div>
+    <div class="gallery-grid stagger">
+
+      <!-- FEATURE SLOT -->
+      <div class="gslot feature">
+        <img src="https://i0.wp.com/otakukon.com/wp-content/uploads/2024/01/DSC_0394-min-scaled.jpg?resize=1024%2C683&ssl=1" alt="Otakukon 2023 highlights" loading="lazy" onerror="this.outerHTML='<div class=\'gph\'><div class=\'gph-cross\'>+</div><p>FEATURE PHOTO</p><small>800×600 · Replace src with your image</small></div>'">
+        <div class="gslot-overlay"><span class="gslot-label">Otakukon 2023</span></div>
+      </div>
+
+      <!-- SLOT 2 — DJ / performer -->
+      <div class="gslot">
+        <img src="https://i0.wp.com/otakukon.com/wp-content/uploads/2026/06/dje.jpg.jpeg" alt="DJ at Otakukon" loading="lazy" onerror="this.outerHTML='<div class=\'gph\'><div class=\'gph-cross\'>+</div><p>PERFORMANCE</p><small>Replace src · 600×450</small></div>'">
+        <div class="gslot-overlay"><span class="gslot-label">Live Performances</span></div>
+      </div>
+
+      <!-- SLOT 3 placeholder -->
+      <div class="gslot">
+        <div class="gph">
+          <div class="gph-cross">+</div>
+          <p>COSPLAY SHOTS</p>
+          <small>Replace div with &lt;img src="…"&gt;</small>
+        </div>
+        <div class="gslot-overlay"><span class="gslot-label">Cosplay</span></div>
+      </div>
+
+      <!-- SLOT 4 placeholder -->
+      <div class="gslot">
+        <div class="gph" style="background:linear-gradient(135deg,#1a5a4a,#7EECD8);">
+          <div class="gph-cross">+</div>
+          <p>JAPAN CULTURE</p>
+          <small>Replace div with &lt;img src="…"&gt;</small>
+        </div>
+        <div class="gslot-overlay"><span class="gslot-label">Culture Corner</span></div>
+      </div>
+
+      <!-- SLOT 5 placeholder -->
+      <div class="gslot">
+        <div class="gph" style="background:linear-gradient(135deg,#6b1a1a,#FF6B1A);">
+          <div class="gph-cross">+</div>
+          <p>ARTIST ALLEY</p>
+          <small>Replace div with &lt;img src="…"&gt;</small>
+        </div>
+        <div class="gslot-overlay"><span class="gslot-label">Artist Alley</span></div>
+      </div>
+
+    </div>
+    <div class="gallery-note reveal">
+      <p>To plug in a photo: replace <code style="color:var(--yellow);font-size:.73rem;">&lt;div class="gph"&gt;…&lt;/div&gt;</code> with <code style="color:var(--yellow);font-size:.73rem;">&lt;img src="your-photo.jpg" alt="…"&gt;</code> — the slot handles sizing automatically.</p>
+      <a class="btn btn-yellow" href="http://instagram.com/otakukonnect" target="_blank" rel="noopener" style="font-size:.9rem;white-space:nowrap;">More on Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKETS -->
+<section class="tickets-bg" id="tickets">
+  <div class="tickets-inner">
+    <div class="section-label on-dark reveal">Phase 2 Pricing · Ends August 5</div>
+    <div class="section-title on-dark reveal">GET YOUR TICKET</div>
+    <div class="ticket-grid stagger">
+      <div class="tcard">
+        <div class="thead"><span class="ttype">Standard Ticket</span></div>
+        <div class="tprice-block">
+          <div class="tprice"><sup>$</sup>8</div>
+          <p class="tdesc">Full-day general access</p>
+        </div>
+        <hr class="tdivider">
+        <ul class="tfeatures">
+          <li>Artist Alley &amp; Vendor Market</li>
+          <li>Anime Screening Room</li>
+          <li>Japan Culture Corner</li>
+          <li>OST Stage performances</li>
+          <li>Food vendor zone</li>
+        </ul>
+        <div class="taction">
+          <a class="btn btn-purple btn-full" href="https://wa.me/263785552326?text=Standard%20Ticket%20-%20OTAKUKON%202026" target="_blank" rel="noopener">Buy Now</a>
+        </div>
+      </div>
+      <div class="tcard featured">
+        <div class="thead"><span class="ttype">Cosplay Ticket</span><span class="tbadge">Best Value</span></div>
+        <div class="tprice-block">
+          <div class="tprice"><sup>$</sup>5</div>
+          <p class="tdesc">For registered cosplay competitors</p>
+        </div>
+        <hr class="tdivider">
+        <ul class="tfeatures">
+          <li>Championship competition entry</li>
+          <li>Backstage access</li>
+          <li>Official badge &amp; lanyard</li>
+          <li>Prize eligibility</li>
+          <li>All standard ticket perks</li>
+        </ul>
+        <div class="taction">
+          <a class="btn btn-red btn-full" href="https://wa.me/263785552326?text=Cosplay%20Ticket%20-%20OTAKUKON%202026" target="_blank" rel="noopener">Register &amp; Buy</a>
+        </div>
+      </div>
+    </div>
+    <div class="phase-bar reveal">
+      <div>
+        <p>Phase 2 pricing ends August 5, 2026</p>
+        <span>Prices increase after this date — secure your spot early.</span>
+      </div>
+      <a class="btn btn-purple" href="https://wa.me/263785552326" target="_blank" rel="noopener" style="font-size:.9rem;padding:.6rem 1.4rem;">Book Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO BUY -->
+<section class="buy-bg">
+  <div class="wrap">
+    <div class="section-label reveal" style="text-align:center;">No Signup Required</div>
+    <div class="section-title reveal" style="text-align:center;">HOW TO PURCHASE</div>
+    <div class="buy-pill reveal">
+      <input type="text" placeholder="Message us · +263 785 552 326 · or dial *788#" readonly>
+      <button onclick="window.open('https://wa.me/263785552326','_blank')">Message Us</button>
+    </div>
+    <div class="buy-methods stagger">
+      <div class="bmethod">
+        <div class="blabel">Dial</div>
+        <div class="bval">*788#</div>
+        <div class="bhint">Works on any phone — no data needed</div>
+      </div>
+      <div class="bmethod">
+        <div class="blabel">WhatsApp</div>
+        <div class="bval">+263 785 552 326</div>
+        <div class="bhint">Tap to message us and reserve your spot</div>
+      </div>
+      <div class="bmethod">
+        <div class="blabel">Email</div>
+        <div class="bval"><a href="mailto:info@otakukon.com" style="color:inherit;text-decoration:none;">info@otakukon.com</a></div>
+        <div class="bhint">For general enquiries and vendor applications</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-bg" id="faq">
+  <div class="wrap">
+    <div class="section-label reveal">Got Questions?</div>
+    <div class="section-title reveal">FREQUENTLY ASKED</div>
+    <div class="faq-list stagger">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Where exactly is Moto Republik?<span class="faq-tog">+</span></div>
+        <div class="faq-a">Moto Republik is at 3 Allan Wilson Avenue, Harare CBD. It is accessible by kombi, taxi, and private transport. Parking is available on site.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What is Otaku Konnect?<span class="faq-tog">+</span></div>
+        <div class="faq-a">Otaku Konnect is the Zimbabwean organisation behind OTAKUKON. Founded to create a space where fans of anime, manga, gaming, and Japanese pop culture can connect and grow together. OTAKUKON is their flagship annual event, first held in December 2023.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I buy tickets at the door?<span class="faq-tog">+</span></div>
+        <div class="faq-a">Yes — but Phase 2 pricing ($5 cosplay / $8 standard) ends August 5. Walk-in prices on the day will be higher, so booking early saves you money.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I enter the cosplay championship?<span class="faq-tog">+</span></div>
+        <div class="faq-a">Purchase a Cosplay Ticket and register your character via WhatsApp (+263 785 552 326). Pre-registration is required — spots are limited. Judging covers craftsmanship, accuracy, and stage performance.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is there an age limit?<span class="faq-tog">+</span></div>
+        <div class="faq-a">OTAKUKON is open to all ages. Under-12s must be accompanied by a parent or guardian. It is a family-friendly event.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I be a vendor or artist at OTAKUKON?<span class="faq-tog">+</span></div>
+        <div class="faq-a">Yes — we welcome local artists and sellers. Message us on WhatsApp (+263 785 552 326) or email info@otakukon.com to apply for a vendor stall. Space is limited so apply as early as possible.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How can I volunteer at the event?<span class="faq-tog">+</span></div>
+        <div class="faq-a">Use the Volunteer Registration card above, or message us directly on WhatsApp. Volunteers are the backbone of OTAKUKON and we are always grateful for people willing to give their time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL BANNER -->
+<section class="social-bg">
+  <div class="social-inner">
+    <div class="social-copy reveal">
+      <h2>FOLLOW THE <span>COMMUNITY</span></h2>
+      <p>Cosplay reveals, artist spotlights, countdown drops, and community moments</p>
+    </div>
+    <div class="social-links stagger">
+      <a class="slink tw" href="http://twitter.com/otakukonnect" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X / Twitter
+      </a>
+      <a class="slink fb" href="http://facebook.com/otakukonnect" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        Facebook
+      </a>
+      <a class="slink ig" href="http://instagram.com/otakukonnect" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Instagram
+      </a>
+      <a class="slink yt" href="http://youtube.com/@otakukonnect" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.6.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.94 1.95C5.12 20 12 20 12 20s6.88 0 8.6-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+        YouTube
+      </a>
+      <a class="slink wa" href="https://wa.me/263785552326" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L.057 23.486a.5.5 0 0 0 .613.613l5.63-1.476A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.815 9.815 0 0 1-5.027-1.381l-.36-.214-3.732.978.997-3.645-.235-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="flogo">OTAKUKON 2026</div>
+      <div class="ftagline">By Otaku Konnect · Zimbabwe</div>
+      <p class="fabout">Zimbabwe's first and premier anime convention — creating a home for fans of Japanese animation, manga, gaming, and pop culture since 2023.</p>
+      <div class="fsocials">
+        <a href="http://twitter.com/otakukonnect"   target="_blank" rel="noopener">Twitter</a>
+        <a href="http://facebook.com/otakukonnect"  target="_blank" rel="noopener">Facebook</a>
+        <a href="http://instagram.com/otakukonnect" target="_blank" rel="noopener">Instagram</a>
+        <a href="http://youtube.com/@otakukonnect"  target="_blank" rel="noopener">YouTube</a>
+        <a href="https://wa.me/263785552326"        target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+    <div class="finfo">
+      <h4>Event Details</h4>
+      <p><strong>Date</strong> Sunday, August 23, 2026</p>
+      <p><strong>Time</strong> 10:00 AM – 9:00 PM</p>
+      <p><strong>Venue</strong> Moto Republik, 3 Allan Wilson Ave, Harare</p>
+      <p><strong>WhatsApp</strong> <a href="https://wa.me/263785552326">+263 785 552 326</a></p>
+      <p><strong>Email</strong> <a href="mailto:info@otakukon.com">info@otakukon.com</a></p>
+      <p><strong>Tickets</strong> Dial *788# or message us</p>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2026 Otaku Konnect Zimbabwe. All rights reserved.</p>
+    <div class="fbot-links">
+      <a href="mailto:info@otakukon.com">Contact</a>
+      <a href="https://wa.me/263785552326?text=Vendor%20Application%20-%20OTAKUKON%202026" target="_blank">Vendors</a>
+      <a href="https://wa.me/263785552326?text=Volunteer%20Application%20-%20OTAKUKON%202026" target="_blank">Volunteer</a>
+      <a href="http://otakukon.com" target="_blank">otakukon.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Drawer */
+function openDrawer() { document.getElementById('drawer').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeDrawer() { document.getElementById('drawer').classList.remove('open'); document.body.style.overflow=''; }
+
+/* Scroll reveal */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.reveal,.stagger').forEach(el => obs.observe(el));
+
+/* FAQ */
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>
